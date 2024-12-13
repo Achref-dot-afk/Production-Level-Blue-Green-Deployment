@@ -52,3 +52,13 @@ services:
     networks:
       - customNetwork
     container_name: grafana
+
+  sonatype:
+    image: sonatype/nexus3:latest
+    ports:
+      - "8081:8081"
+    networks:
+      - customNetwork
+    container_name: sonatype
+    volumes:
+      - ./nexus-data:/nexus-data

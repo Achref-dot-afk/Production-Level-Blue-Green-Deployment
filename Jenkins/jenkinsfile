@@ -4,8 +4,14 @@ pipeline {
         jdk 'jdk17'
         maven 'maven3'
     }
+     parameters {
+        choice(name: 'DEPLOY_ENV', choices: ['blue', 'green'], description: 'Choose which environment to deploy: Blue or Green')
+        choice(name: 'DOCKER_TAG', choices: ['blue', 'green'], description: 'Choose the Docker image tag for the deployment')
+        booleanParam(name: 'SWITCH_TRAFFIC', defaultValue: false, description: 'Switch traffic between Blue and Green')
+    }
     environment {
         SCANNER_HOME = tool 'sonar-scanner'
+        TAG = "${params.DOCKER_TAG}"
     }
     stages {
         stage('Pull Code') {
@@ -28,11 +34,6 @@ pipeline {
                 sh "trivy fs --format table -o fs.html ."
             }
         }
-        stage('Display Trivy FS Scan') {
-            steps {
-                sh "cat fs.html"
-            }
-        }
         stage('Sonarqube Analysis') {
             steps {
                   withSonarQubeEnv('sonar-server') {
@@ -40,21 +41,52 @@ pipeline {
                 }
              }
         }
+        stage('Quality Gate') {
+            steps {
+                timeout(time: 1, unit: 'HOURS') {
+                    waitForQualityGate abortPipeline: false
+                }
+            }
+        }
         stage('Maven build') {
             steps {
                 sh "mvn package -DskipTests=true"
             }
         }
-          stage("Docker Build & Push"){
+        stage('Publish artifacts to nexus') {
+            steps {
+                withMaven(globalMavenSettingsConfig: 'maven-settings', jdk: 'jdk17', maven: 'maven3', mavenSettingsConfig: '', traceability: true) {
+                    sh "mvn deploy -DskipTests=true"
+                }
+            }
+        }
+        stage("Docker Build & Push"){
             steps{
                 script{
                    withDockerRegistry(credentialsId: 'docker', toolName: 'docker'){   
-                       sh "docker build -t achref2h/bankapp:blue ."
-                       sh "docker push achref2h/bankapp:blue "
+                       sh "docker build -t achref2h/bankapp:${TAG} ."
+                       sh "docker push achref2h/bankapp:${TAG} "
                     }
                 }
             }
         }
+        stage('Trivy Docker Scan') {
+            steps {
+                sh "trivy image --format table -o docker.html achref2h/bankapp:${TAG}"
+            }
+
+          post {
+            always {
+                emailext attachLog: true,
+                subject: "'${currentBuild.result}'",
+                body: "Project: ${env.JOB_NAME}<br/>" +
+                    "Build Number: ${env.BUILD_NUMBER}<br/>" +
+                    "URL: ${env.BUILD_URL}<br/>",
+                to: 'achrefh1bli22@gmail.com',                           
+                attachmentsPattern: 'fs.html'
+        }
     }
+  }
+ }
 }
 
