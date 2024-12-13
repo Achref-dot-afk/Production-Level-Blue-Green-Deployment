@@ -1,0 +1,56 @@
+pipeline {
+    agent any
+     tools{
+        jdk 'jdk17'
+        maven 'maven3'
+    }
+    environment {
+        SCANNER_HOME = tool 'sonar-scanner'
+    }
+    stages {
+        stage('Pull Code') {
+            steps {
+                git branch: 'main',credentialsId: 'git' , url: 'https://github.com/Achref-dot-afk/Production-Level-Blue-Green-Deployment.git'
+            }
+        }
+        stage('Maven Compile') {
+            steps {
+                sh "mvn clean compile"
+            }
+        }
+        stage('Trivy FS Scan') {
+            steps {
+                sh "trivy fs --format table -o fs.html ."
+            }
+        }
+        stage('Display Trivy FS Scan') {
+            steps {
+                echo '<h1>Trivy FS Scan</h1>'
+                echo '<iframe src="fs.html" width="100%" height="600"></iframe>'
+            }
+        }
+        stage('Sonarqube Analysis') {
+            steps {
+                  withSonarQubeEnv('sonar-server') {
+                      sh "$SCANNER_HOME/bin/sonar-scanner -Dsonar.projectKey=Bankapp -Dsonar.projectName='Bankapp' -Dsonar.java.binaries=target/classes"
+                }
+             }
+        }
+          stage("Docker Build & Push"){
+            steps{
+                script{
+                   withDockerRegistry(credentialsId: 'docker', toolName: 'docker'){   
+                       sh "docker build achref2h/Bankapp:blue ."
+                       sh "docker tag achref2h/Bankapp:blue "
+                       sh "docker push achref2h/Bankapp:blue "
+                    }
+                }
+            }
+        }
+        stage('Run Docker Container') {
+            steps {
+                sh "docker run -d -p 8080:8080 achref2h/Bankapp:blue"
+            }
+        }
+    }
+}
