@@ -25,7 +25,7 @@ pipeline {
         }
         stage('Display Trivy FS Scan') {
             steps {
-              publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: true, reportDir: '.', reportFiles: 'fs.html', reportName: 'Trivy FS Scan'])
+                sh "cat fs.html"
             }
         }
         stage('Sonarqube Analysis') {
