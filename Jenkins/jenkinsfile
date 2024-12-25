@@ -71,6 +71,10 @@ pipeline {
                 }
             }
         }
+        stage('Trivy Docker Scan') {
+            steps {
+                sh "trivy image --format table -o docker.html achref2h/bankapp:${TAG}"
+            }
         stage('Deploy MySQL Deployment and Service') {
             steps {
                 script {
@@ -102,11 +106,47 @@ pipeline {
                 }
             }
         }
-        stage('Trivy Docker Scan') {
+        stage('Deploy to Kubernetes') {
             steps {
-                sh "trivy image --format table -o docker.html achref2h/bankapp:${TAG}"
-            }
+                script {
+                    def deploymentFile = ""
+                    if (params.DEPLOY_ENV == 'blue') {
+                        deploymentFile = 'app-deployment-blue.yml'
+                    } else {
+                        deploymentFile = 'app-deployment-green.yml'
+                    }
 
+                    configFileProvider([configFile(fileId: 'kubeconfig', variable: 'KUBECONFIG_FILE')]) {
+                        docker.image('bitnami/kubectl:latest').inside("--entrypoint=''") {
+
+                            sh """
+                                export KUBECONFIG=${KUBECONFIG_FILE}
+                                kubectl apply -f ${deploymentFile} -n ${KUBE_NAMESPACE}
+                            """
+                        }
+                    }
+                }
+            }
+        }
+        stage('Switch Traffic Between Blue & Green Environment') {
+            when {
+                expression { return params.SWITCH_TRAFFIC }
+            }
+            steps {
+                script {
+                    def newEnv = params.DEPLOY_ENV
+
+                    configFileProvider([configFile(fileId: 'kubeconfig', variable: 'KUBECONFIG_FILE')]) {
+                        docker.image('bitnami/kubectl:latest').inside("--entrypoint=''") {
+                        sh '''
+                            kubectl patch service bankapp-service -p "{\\"spec\\": {\\"selector\\": {\\"app\\": \\"bankapp\\", \\"version\\": \\"''' + newEnv + '''\\"}}}" -n ${KUBE_NAMESPACE}
+                        '''
+                    }
+                    echo "Traffic has been switched to the ${newEnv} environment."
+                }
+            }
+        }
+        }
           post {
             always {
                 emailext attachLog: true,
