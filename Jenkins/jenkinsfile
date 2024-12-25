@@ -78,7 +78,7 @@ pipeline {
                         docker.image('bitnami/kubectl:latest').inside("--entrypoint=''") {
                             sh """
                                 export KUBECONFIG=${KUBECONFIG_FILE}
-                                kubectl apply -f mysql-ds.yml -n ${KUBE_NAMESPACE}
+                                kubectl apply -f ./AKS/manifests/mysql-ds.yml -n ${KUBE_NAMESPACE}
                             """
                         }
                     }
@@ -93,8 +93,8 @@ pipeline {
 
                             sh """
                                 export KUBECONFIG=${KUBECONFIG_FILE}
-                                if ! kubectl get svc bankapp-service -n ${KUBE_NAMESPACE}; then
-                                    kubectl apply -f bankapp-service.yml -n ${KUBE_NAMESPACE}
+                                if ! kubectl get svc ./AKS/manifests/bankapp-service -n ${KUBE_NAMESPACE}; then
+                                    kubectl apply -f ./AKS/manifests/bankapp-service.yml -n ${KUBE_NAMESPACE}
                                 fi
                             """
                         }

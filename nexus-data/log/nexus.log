@@ -994,3 +994,113 @@ Started Sonatype Nexus OSS 3.75.1-01
 2024-12-25 13:52:41,751+0000 INFO  [FelixStartLevel]  *SYSTEM org.elasticsearch.plugins - [d9e1eb04-b321eea5-827cf308-355d95c4-33584ac8] modules [], plugins [content-auth-plugin], sites []
 2024-12-25 13:52:41,809+0000 INFO  [FelixStartLevel]  *SYSTEM org.elasticsearch.env - [d9e1eb04-b321eea5-827cf308-355d95c4-33584ac8] using [1] data paths, mounts [[/nexus-data (C:\)]], net usable_space [38.2gb], net total_space [476gb], spins? [possibly], types [9p]
 2024-12-25 13:52:41,809+0000 INFO  [FelixStartLevel]  *SYSTEM org.elasticsearch.env - [d9e1eb04-b321eea5-827cf308-355d95c4-33584ac8] heap size [2.6gb], compressed ordinary object pointers [true]
+2024-12-25 13:52:43,401+0000 INFO  [FelixStartLevel]  *SYSTEM org.elasticsearch.node - [d9e1eb04-b321eea5-827cf308-355d95c4-33584ac8] initialized
+2024-12-25 13:52:43,402+0000 INFO  [FelixStartLevel]  *SYSTEM org.elasticsearch.node - [d9e1eb04-b321eea5-827cf308-355d95c4-33584ac8] starting ...
+2024-12-25 13:52:43,404+0000 INFO  [FelixStartLevel]  *SYSTEM org.elasticsearch.transport - [d9e1eb04-b321eea5-827cf308-355d95c4-33584ac8] publish_address {local[1]}, bound_addresses {local[1]}
+2024-12-25 13:52:43,406+0000 INFO  [FelixStartLevel]  *SYSTEM org.elasticsearch.discovery - [d9e1eb04-b321eea5-827cf308-355d95c4-33584ac8] nexus/C0mcF249SZWTPsOLwTy5aw
+2024-12-25 13:52:43,410+0000 INFO  [elasticsearch[d9e1eb04-b321eea5-827cf308-355d95c4-33584ac8][clusterService#updateTask][T#1]]  *SYSTEM org.elasticsearch.cluster.service - [d9e1eb04-b321eea5-827cf308-355d95c4-33584ac8] new_master {d9e1eb04-b321eea5-827cf308-355d95c4-33584ac8}{C0mcF249SZWTPsOLwTy5aw}{local}{local[1]}{local=true, master=true}, reason: local-disco-initial_connect(master)
+2024-12-25 13:52:43,414+0000 INFO  [FelixStartLevel]  *SYSTEM org.elasticsearch.node - [d9e1eb04-b321eea5-827cf308-355d95c4-33584ac8] started
+2024-12-25 13:52:43,883+0000 INFO  [elasticsearch[d9e1eb04-b321eea5-827cf308-355d95c4-33584ac8][clusterService#updateTask][T#1]]  *SYSTEM org.elasticsearch.gateway - [d9e1eb04-b321eea5-827cf308-355d95c4-33584ac8] recovered [5] indices into cluster_state
+2024-12-25 13:52:44,848+0000 INFO  [elasticsearch[d9e1eb04-b321eea5-827cf308-355d95c4-33584ac8][clusterService#updateTask][T#1]]  *SYSTEM org.elasticsearch.cluster.routing.allocation - [d9e1eb04-b321eea5-827cf308-355d95c4-33584ac8] Cluster health status changed from [RED] to [GREEN] (reason: [shards started [[2e9a1e67e8a325bcd6ee9f6790ff6c769e791d56][0]] ...]).
+2024-12-25 13:52:45,194+0000 INFO  [FelixStartLevel]  *SYSTEM com.sonatype.nexus.repository.nuget.datastore.internal.v2.NugetV2LocalGalleryFacet - Enabled NuGet feed cooperation for nuget-hosted
+2024-12-25 13:52:45,323+0000 INFO  [FelixStartLevel]  *SYSTEM org.sonatype.nexus.repository.httpclient.internal.HttpClientFacetImpl - Remote connection status of repository nuget.org-proxy set to Ready to Connect.
+2024-12-25 13:52:45,325+0000 INFO  [FelixStartLevel]  *SYSTEM org.ehcache.jsr107.ConfigurationMerger - Configuration of cache nuget.org-proxy#negative-cache will be supplemented by template nexus-default
+2024-12-25 13:52:45,327+0000 INFO  [FelixStartLevel]  *SYSTEM org.ehcache.core.EhcacheManager - Cache 'nuget.org-proxy#negative-cache' created in EhcacheManager.
+2024-12-25 13:52:45,328+0000 INFO  [FelixStartLevel]  *SYSTEM org.ehcache.jsr107.Eh107CacheManager - Registering Ehcache MBean javax.cache:type=CacheConfiguration,CacheManager=file./opt/sonatype/nexus/etc/fabric/ehcache.xml,Cache=nuget.org-proxy#negative-cache
+2024-12-25 13:52:45,328+0000 INFO  [FelixStartLevel]  *SYSTEM org.ehcache.jsr107.Eh107CacheManager - Registering Ehcache MBean javax.cache:type=CacheStatistics,CacheManager=file./opt/sonatype/nexus/etc/fabric/ehcache.xml,Cache=nuget.org-proxy#negative-cache
+2024-12-25 13:52:45,330+0000 INFO  [FelixStartLevel]  *SYSTEM com.sonatype.nexus.repository.nuget.datastore.internal.v2.NugetV2RemoteGalleryFacet - Enabled NuGet feed cooperation for nuget.org-proxy
+2024-12-25 13:52:45,331+0000 INFO  [FelixStartLevel]  *SYSTEM org.ehcache.jsr107.ConfigurationMerger - Configuration of cache nuget.org-proxy#odata-query-cache will be supplemented by template nexus-default
+2024-12-25 13:52:45,333+0000 INFO  [FelixStartLevel]  *SYSTEM org.ehcache.core.EhcacheManager - Cache 'nuget.org-proxy#odata-query-cache' created in EhcacheManager.
+2024-12-25 13:52:45,333+0000 INFO  [FelixStartLevel]  *SYSTEM org.ehcache.jsr107.Eh107CacheManager - Registering Ehcache MBean javax.cache:type=CacheConfiguration,CacheManager=file./opt/sonatype/nexus/etc/fabric/ehcache.xml,Cache=nuget.org-proxy#odata-query-cache
+2024-12-25 13:52:45,334+0000 INFO  [FelixStartLevel]  *SYSTEM org.ehcache.jsr107.Eh107CacheManager - Registering Ehcache MBean javax.cache:type=CacheStatistics,CacheManager=file./opt/sonatype/nexus/etc/fabric/ehcache.xml,Cache=nuget.org-proxy#odata-query-cache
+2024-12-25 13:52:45,365+0000 INFO  [FelixStartLevel]  *SYSTEM org.sonatype.nexus.repository.httpclient.internal.HttpClientFacetImpl - Remote connection status of repository nuget-group set to Ready to Connect.
+2024-12-25 13:52:45,367+0000 INFO  [FelixStartLevel]  *SYSTEM com.sonatype.nexus.repository.nuget.datastore.internal.v2.NugetV2RemoteGalleryFacet - Enabled NuGet feed cooperation for nuget-group
+2024-12-25 13:52:45,367+0000 INFO  [FelixStartLevel]  *SYSTEM org.ehcache.jsr107.ConfigurationMerger - Configuration of cache nuget-group#odata-query-cache will be supplemented by template nexus-default
+2024-12-25 13:52:45,369+0000 INFO  [FelixStartLevel]  *SYSTEM org.ehcache.core.EhcacheManager - Cache 'nuget-group#odata-query-cache' created in EhcacheManager.
+2024-12-25 13:52:45,370+0000 INFO  [FelixStartLevel]  *SYSTEM org.ehcache.jsr107.Eh107CacheManager - Registering Ehcache MBean javax.cache:type=CacheConfiguration,CacheManager=file./opt/sonatype/nexus/etc/fabric/ehcache.xml,Cache=nuget-group#odata-query-cache
+2024-12-25 13:52:45,370+0000 INFO  [FelixStartLevel]  *SYSTEM org.ehcache.jsr107.Eh107CacheManager - Registering Ehcache MBean javax.cache:type=CacheStatistics,CacheManager=file./opt/sonatype/nexus/etc/fabric/ehcache.xml,Cache=nuget-group#odata-query-cache
+2024-12-25 13:52:45,412+0000 INFO  [FelixStartLevel]  *SYSTEM org.sonatype.nexus.repository.httpclient.internal.HttpClientFacetImpl - Remote connection status of repository maven-central set to Ready to Connect.
+2024-12-25 13:52:45,413+0000 INFO  [FelixStartLevel]  *SYSTEM org.ehcache.jsr107.ConfigurationMerger - Configuration of cache maven-central#negative-cache will be supplemented by template nexus-default
+2024-12-25 13:52:45,417+0000 INFO  [FelixStartLevel]  *SYSTEM org.ehcache.core.EhcacheManager - Cache 'maven-central#negative-cache' created in EhcacheManager.
+2024-12-25 13:52:45,418+0000 INFO  [FelixStartLevel]  *SYSTEM org.ehcache.jsr107.Eh107CacheManager - Registering Ehcache MBean javax.cache:type=CacheConfiguration,CacheManager=file./opt/sonatype/nexus/etc/fabric/ehcache.xml,Cache=maven-central#negative-cache
+2024-12-25 13:52:45,418+0000 INFO  [FelixStartLevel]  *SYSTEM org.ehcache.jsr107.Eh107CacheManager - Registering Ehcache MBean javax.cache:type=CacheStatistics,CacheManager=file./opt/sonatype/nexus/etc/fabric/ehcache.xml,Cache=maven-central#negative-cache
+2024-12-25 13:52:45,455+0000 INFO  [FelixStartLevel]  *SYSTEM org.sonatype.nexus.extender.NexusLifecycleManager - Start CAPABILITIES
+2024-12-25 13:52:45,611+0000 INFO  [jetty-main-1]  *SYSTEM org.sonatype.nexus.bootstrap.osgi.BootstrapListener - Initialized
+2024-12-25 13:52:45,611+0000 INFO  [FelixStartLevel]  *SYSTEM org.sonatype.nexus.extender.NexusLifecycleManager - Start TASKS
+2024-12-25 13:52:45,656+0000 INFO  [FelixStartLevel]  *SYSTEM org.sonatype.nexus.quartz.internal.task.QuartzTaskInfo - Task 'Metric aggregation' [content.usage.aggregation] removed
+2024-12-25 13:52:45,675+0000 INFO  [FelixStartLevel]  *SYSTEM org.sonatype.nexus.quartz.internal.task.QuartzTaskInfo - Task 'Metric aggregation' [content.usage.aggregation] : state=WAITING
+2024-12-25 13:52:45,703+0000 INFO  [FelixStartLevel]  *SYSTEM org.sonatype.nexus.scheduling.TaskSchedulerImpl - Task 'Metric aggregation' [content.usage.aggregation] scheduled: cron
+2024-12-25 13:52:45,705+0000 INFO  [FelixStartLevel]  *SYSTEM org.sonatype.nexus.quartz.internal.task.QuartzTaskInfo - Task 'Metric aggregation' [content.usage.aggregation] runNow
+2024-12-25 13:52:45,705+0000 INFO  [FelixStartLevel]  *SYSTEM org.sonatype.nexus.quartz.internal.task.QuartzTaskInfo - Task 'Metric aggregation' [content.usage.aggregation] state change WAITING -> RUNNING
+2024-12-25 13:52:45,724+0000 INFO  [FelixStartLevel]  *SYSTEM org.sonatype.nexus.quartz.internal.task.QuartzTaskInfo - Task 'Malicious Risk On Disk - Auto enable Health Check for proxy repositories on startup' [malicious-risk-on-disk-auto-enable-rhc] removed
+2024-12-25 13:52:45,729+0000 INFO  [FelixStartLevel]  *SYSTEM org.sonatype.nexus.quartz.internal.task.QuartzTaskInfo - Task 'Malicious Risk On Disk - Auto enable Health Check for proxy repositories on startup' [malicious-risk-on-disk-auto-enable-rhc] : state=WAITING
+2024-12-25 13:52:45,733+0000 INFO  [FelixStartLevel]  *SYSTEM org.sonatype.nexus.scheduling.TaskSchedulerImpl - Task 'Malicious Risk On Disk - Auto enable Health Check for proxy repositories on startup' [malicious-risk-on-disk-auto-enable-rhc] scheduled: daily
+2024-12-25 13:52:45,736+0000 INFO  [FelixStartLevel]  *SYSTEM com.sonatype.nexus.risk.riskondisk.MaliciousRiskOnDiskAutoEnableRHCListener - Updated malicious-risk-on-disk-auto-enable-rhc task. Starting at 2024-12-25T13:53:15.726Z.
+2024-12-25 13:52:45,746+0000 INFO  [FelixStartLevel]  *SYSTEM org.sonatype.nexus.quartz.internal.task.QuartzTaskInfo - Task 'System - Repository Health Check: maven-central' [healthcheck] removed
+2024-12-25 13:52:45,752+0000 INFO  [FelixStartLevel]  *SYSTEM org.sonatype.nexus.quartz.internal.task.QuartzTaskInfo - Task 'System - Repository Health Check: maven-central' [healthcheck] : state=WAITING
+2024-12-25 13:52:45,757+0000 INFO  [FelixStartLevel]  *SYSTEM org.sonatype.nexus.scheduling.TaskSchedulerImpl - Task 'System - Repository Health Check: maven-central' [healthcheck] scheduled: hourly
+2024-12-25 13:52:45,760+0000 INFO  [FelixStartLevel]  *SYSTEM com.sonatype.nexus.plugins.healthcheck.service.impl.HealthCheckTaskManagerImpl - Enabled health check for repository maven-central
+2024-12-25 13:52:45,767+0000 INFO  [FelixStartLevel]  *SYSTEM org.sonatype.nexus.quartz.internal.task.QuartzTaskInfo - Task 'System - Repository Health Check: nuget.org-proxy' [healthcheck] removed
+2024-12-25 13:52:45,771+0000 INFO  [FelixStartLevel]  *SYSTEM org.sonatype.nexus.quartz.internal.task.QuartzTaskInfo - Task 'System - Repository Health Check: nuget.org-proxy' [healthcheck] : state=WAITING
+2024-12-25 13:52:45,774+0000 INFO  [FelixStartLevel]  *SYSTEM org.sonatype.nexus.scheduling.TaskSchedulerImpl - Task 'System - Repository Health Check: nuget.org-proxy' [healthcheck] scheduled: hourly
+2024-12-25 13:52:45,776+0000 INFO  [FelixStartLevel]  *SYSTEM com.sonatype.nexus.plugins.healthcheck.service.impl.HealthCheckTaskManagerImpl - Enabled health check for repository nuget.org-proxy
+2024-12-25 13:52:45,789+0000 INFO  [FelixStartLevel]  *SYSTEM org.sonatype.nexus.repository.search.elasticsearch.IndexStartupRebuildManager - Skipping rebuild of repository indexes
+2024-12-25 13:52:45,806+0000 INFO  [FelixStartLevel]  *SYSTEM org.sonatype.nexus.quartz.internal.datastore.DatastoreQuartzSchedulerSPI - Scheduler put into ready mode
+2024-12-25 13:52:45,835+0000 INFO  [jetty-main-1]  *SYSTEM org.sonatype.nexus.rapture.internal.RaptureWebResourceBundle - UI plugin descriptors:
+2024-12-25 13:52:45,838+0000 INFO  [jetty-main-1]  *SYSTEM org.sonatype.nexus.rapture.internal.RaptureWebResourceBundle -   nexus-rapture
+2024-12-25 13:52:45,839+0000 INFO  [quartz-9-thread-2]  *SYSTEM org.sonatype.nexus.quartz.internal.task.QuartzTaskInfo - Task 'Cleanup unused maven2 blobs from nexus' [assetBlob.cleanup] state change WAITING -> RUNNING
+2024-12-25 13:52:45,842+0000 INFO  [jetty-main-1]  *SYSTEM org.sonatype.nexus.rapture.internal.RaptureWebResourceBundle -   nexus-coreui-plugin
+2024-12-25 13:52:45,844+0000 INFO  [jetty-main-1]  *SYSTEM org.sonatype.nexus.rapture.internal.RaptureWebResourceBundle - ExtJS UI plugin descriptors:
+2024-12-25 13:52:45,845+0000 INFO  [jetty-main-1]  *SYSTEM org.sonatype.nexus.rapture.internal.RaptureWebResourceBundle -   nexus-rapture
+2024-12-25 13:52:45,846+0000 INFO  [jetty-main-1]  *SYSTEM org.sonatype.nexus.rapture.internal.RaptureWebResourceBundle -   nexus-blobstore-s3
+2024-12-25 13:52:45,848+0000 INFO  [jetty-main-1]  *SYSTEM org.sonatype.nexus.rapture.internal.RaptureWebResourceBundle -   nexus-proximanova-plugin
+2024-12-25 13:52:45,849+0000 INFO  [jetty-main-1]  *SYSTEM org.sonatype.nexus.rapture.internal.RaptureWebResourceBundle -   nexus-rutauth-plugin
+2024-12-25 13:52:45,850+0000 INFO  [jetty-main-1]  *SYSTEM org.sonatype.nexus.rapture.internal.RaptureWebResourceBundle -   nexus-blobstore-azure-cloud
+2024-12-25 13:52:45,851+0000 INFO  [jetty-main-1]  *SYSTEM org.sonatype.nexus.rapture.internal.RaptureWebResourceBundle -   nexus-coreui-plugin
+2024-12-25 13:52:45,851+0000 INFO  [jetty-main-1]  *SYSTEM org.sonatype.nexus.rapture.internal.RaptureWebResourceBundle -   nexus-proui-plugin
+2024-12-25 13:52:45,852+0000 INFO  [quartz-9-thread-3]  *SYSTEM org.sonatype.nexus.quartz.internal.task.QuartzTaskInfo - Task 'Cleanup unused nuget blobs from nexus' [assetBlob.cleanup] state change WAITING -> RUNNING
+2024-12-25 13:52:45,852+0000 INFO  [jetty-main-1]  *SYSTEM org.sonatype.nexus.rapture.internal.RaptureWebResourceBundle -   nexus-repository-maven
+2024-12-25 13:52:45,853+0000 INFO  [jetty-main-1]  *SYSTEM org.sonatype.nexus.rapture.internal.RaptureWebResourceBundle -   nexus-onboarding-plugin
+2024-12-25 13:52:45,854+0000 INFO  [jetty-main-1]  *SYSTEM org.sonatype.nexus.rapture.internal.RaptureWebResourceBundle -   nexus-repository-npm
+2024-12-25 13:52:45,854+0000 INFO  [jetty-main-1]  *SYSTEM org.sonatype.nexus.rapture.internal.RaptureWebResourceBundle -   nexus-repository-nuget
+2024-12-25 13:52:45,854+0000 INFO  [jetty-main-1]  *SYSTEM org.sonatype.nexus.rapture.internal.RaptureWebResourceBundle -   nexus-repository-rubygems
+2024-12-25 13:52:45,855+0000 INFO  [jetty-main-1]  *SYSTEM org.sonatype.nexus.rapture.internal.RaptureWebResourceBundle -   nexus-repository-docker
+2024-12-25 13:52:45,855+0000 INFO  [jetty-main-1]  *SYSTEM org.sonatype.nexus.rapture.internal.RaptureWebResourceBundle -   nexus-repository-pypi
+2024-12-25 13:52:45,856+0000 INFO  [jetty-main-1]  *SYSTEM org.sonatype.nexus.rapture.internal.RaptureWebResourceBundle -   nexus-analytics-plugin
+2024-12-25 13:52:45,862+0000 INFO  [jetty-main-1]  *SYSTEM org.sonatype.nexus.internal.webresources.WebResourceServlet - Max-age: 30 days (2592000 seconds)
+2024-12-25 13:52:45,862+0000 INFO  [quartz-9-thread-2]  *SYSTEM org.sonatype.nexus.quartz.internal.task.QuartzTaskInfo - Task 'Cleanup unused maven2 blobs from nexus' [assetBlob.cleanup] state change RUNNING -> WAITING (OK)
+2024-12-25 13:52:45,869+0000 INFO  [quartz-9-thread-3]  *SYSTEM org.sonatype.nexus.quartz.internal.task.QuartzTaskInfo - Task 'Cleanup unused nuget blobs from nexus' [assetBlob.cleanup] state change RUNNING -> WAITING (OK)
+2024-12-25 13:52:45,874+0000 INFO  [jetty-main-1]  *SYSTEM com.softwarementors.extjs.djn.servlet.DirectJNgineServlet - Servlet GLOBAL configuration: debug=false, providersUrl=service/extdirect, minify=false, batchRequestsMultithreadingEnabled=true, batchRequestsMinThreadsPoolSize=16, batchRequestsMaxThreadsPoolSize=80, batchRequestsMaxThreadsPerRequest=8, batchRequestsMaxThreadKeepAliveSeconds=60, gsonBuilderConfiguratorClass=org.sonatype.nexus.extdirect.internal.ExtDirectGsonBuilderConfigurator, dispatcherClass=com.softwarementors.extjs.djn.servlet.ssm.SsmDispatcher, jsonRequestProcessorThreadClass=org.sonatype.nexus.extdirect.internal.ExtDirectJsonRequestProcessorThread, contextPath=--not specified: calculated via Javascript--, createSourceFiles=true
+2024-12-25 13:52:45,875+0000 INFO  [jetty-main-1]  *SYSTEM com.softwarementors.extjs.djn.servlet.DirectJNgineServlet - Servlet GLOBAL configuration: registryConfiguratorClass=
+2024-12-25 13:52:45,901+0000 INFO  [jetty-main-1]  *SYSTEM com.softwarementors.extjs.djn.jscodegen.CodeFileGenerator - Creating source files for APIs...
+2024-12-25 13:52:45,946+0000 INFO  [quartz-9-thread-1]  *SYSTEM org.sonatype.nexus.quartz.internal.task.QuartzTaskInfo - Task 'Metric aggregation' [content.usage.aggregation] state change RUNNING -> WAITING (OK)
+2024-12-25 13:52:46,203+0000 INFO  [jetty-main-1]  *SYSTEM org.sonatype.nexus.siesta.SiestaServlet - JAX-RS RuntimeDelegate: org.sonatype.nexus.siesta.internal.resteasy.SisuResteasyProviderFactory@65299186
+2024-12-25 13:52:46,253+0000 INFO  [jetty-main-1]  *SYSTEM org.jboss.resteasy.plugins.validation.i18n - RESTEASY008550: Unable to find CDI supporting ValidatorFactory. Using default ValidatorFactory
+2024-12-25 13:52:47,052+0000 INFO  [jetty-main-1]  *SYSTEM org.sonatype.nexus.siesta.SiestaServlet - Initialized
+2024-12-25 13:52:47,055+0000 INFO  [jetty-main-1]  *SYSTEM org.sonatype.nexus.repository.httpbridge.internal.ViewServlet - Initialized
+2024-12-25 13:52:47,076+0000 INFO  [jetty-main-1]  *SYSTEM org.eclipse.jetty.server.handler.ContextHandler - Started o.e.j.w.WebAppContext@18004123{Sonatype Nexus,/,null,AVAILABLE}
+2024-12-25 13:52:47,122+0000 INFO  [jetty-main-1]  *SYSTEM org.eclipse.jetty.server.AbstractConnector - Started ServerConnector@1adf1c05{HTTP/1.1, (http/1.1)}{0.0.0.0:8081}
+2024-12-25 13:52:47,123+0000 INFO  [jetty-main-1]  *SYSTEM org.eclipse.jetty.server.Server - Started @100656ms
+2024-12-25 13:52:47,124+0000 INFO  [jetty-main-1]  *SYSTEM org.sonatype.nexus.bootstrap.jetty.JettyServer - 
+-------------------------------------------------
+
+Started Sonatype Nexus OSS 3.75.1-01
+
+-------------------------------------------------
+2024-12-25 13:52:50,748+0000 INFO  [quartz-9-thread-4]  *SYSTEM org.sonatype.nexus.quartz.internal.task.QuartzTaskInfo - Task 'System - Repository Health Check: maven-central' [healthcheck] state change WAITING -> RUNNING
+2024-12-25 13:52:50,766+0000 INFO  [quartz-9-thread-5]  *SYSTEM org.sonatype.nexus.quartz.internal.task.QuartzTaskInfo - Task 'System - Repository Health Check: nuget.org-proxy' [healthcheck] state change WAITING -> RUNNING
+2024-12-25 13:52:51,506+0000 INFO  [quartz-9-thread-4]  *SYSTEM org.sonatype.nexus.scheduling.TaskSchedulerImpl - Task 'System - Repository Health Check: maven-central' [healthcheck] scheduled: hourly
+2024-12-25 13:52:51,509+0000 INFO  [quartz-9-thread-4]  *SYSTEM org.sonatype.nexus.quartz.internal.task.QuartzTaskInfo - Task 'System - Repository Health Check: maven-central' [healthcheck] state change RUNNING -> WAITING (OK)
+2024-12-25 13:52:51,757+0000 INFO  [quartz-9-thread-5]  *SYSTEM org.sonatype.nexus.scheduling.TaskSchedulerImpl - Task 'System - Repository Health Check: nuget.org-proxy' [healthcheck] scheduled: hourly
+2024-12-25 13:52:51,759+0000 INFO  [quartz-9-thread-5]  *SYSTEM org.sonatype.nexus.quartz.internal.task.QuartzTaskInfo - Task 'System - Repository Health Check: nuget.org-proxy' [healthcheck] state change RUNNING -> WAITING (OK)
+2024-12-25 13:53:15,732+0000 INFO  [quartz-9-thread-6]  *SYSTEM org.sonatype.nexus.quartz.internal.task.QuartzTaskInfo - Task 'Malicious Risk On Disk - Auto enable Health Check for proxy repositories on startup' [malicious-risk-on-disk-auto-enable-rhc] state change WAITING -> RUNNING
+2024-12-25 13:53:15,735+0000 INFO  [quartz-9-thread-6]  *SYSTEM com.sonatype.nexus.risk.riskondisk.MaliciousRiskOnDiskAutoEnableRHCTask - Starting malicious-risk-on-disk-auto-enable-rhc task
+2024-12-25 13:53:15,736+0000 INFO  [quartz-9-thread-6]  *SYSTEM com.sonatype.nexus.risk.riskondisk.MaliciousRiskOnDiskAutoEnableRHCTask - Found 2 proxy repositories
+2024-12-25 13:53:15,920+0000 INFO  [quartz-9-thread-6]  *SYSTEM com.sonatype.nexus.risk.riskondisk.MaliciousRiskOnDiskAutoEnableRHCTask - Completed malicious-risk-on-disk-auto-enable-rhc task
+2024-12-25 13:53:15,922+0000 INFO  [quartz-9-thread-6]  *SYSTEM org.sonatype.nexus.quartz.internal.task.QuartzTaskInfo - Task 'Malicious Risk On Disk - Auto enable Health Check for proxy repositories on startup' [malicious-risk-on-disk-auto-enable-rhc] state change RUNNING -> WAITING (OK)
+2024-12-25 14:00:00,018+0000 INFO  [quartz-9-thread-7]  *SYSTEM org.sonatype.nexus.quartz.internal.task.QuartzTaskInfo - Task 'Cleanup unused maven2 blobs from nexus' [assetBlob.cleanup] state change WAITING -> RUNNING
+2024-12-25 14:00:00,048+0000 INFO  [quartz-9-thread-8]  *SYSTEM org.sonatype.nexus.quartz.internal.task.QuartzTaskInfo - Task 'Cleanup unused nuget blobs from nexus' [assetBlob.cleanup] state change WAITING -> RUNNING
+2024-12-25 14:00:00,054+0000 INFO  [quartz-9-thread-7]  *SYSTEM org.sonatype.nexus.quartz.internal.task.QuartzTaskInfo - Task 'Cleanup unused maven2 blobs from nexus' [assetBlob.cleanup] state change RUNNING -> WAITING (OK)
+2024-12-25 14:00:00,057+0000 INFO  [quartz-9-thread-8]  *SYSTEM org.sonatype.nexus.quartz.internal.task.QuartzTaskInfo - Task 'Cleanup unused nuget blobs from nexus' [assetBlob.cleanup] state change RUNNING -> WAITING (OK)
+2024-12-25 14:01:00,016+0000 INFO  [quartz-9-thread-9]  *SYSTEM org.sonatype.nexus.quartz.internal.task.QuartzTaskInfo - Task 'Metric aggregation' [content.usage.aggregation] state change WAITING -> RUNNING
+2024-12-25 14:01:00,059+0000 INFO  [quartz-9-thread-9]  *SYSTEM org.sonatype.nexus.quartz.internal.task.QuartzTaskInfo - Task 'Metric aggregation' [content.usage.aggregation] state change RUNNING -> WAITING (OK)
