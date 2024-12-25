@@ -46,12 +46,6 @@ resource "azurerm_kubernetes_cluster" "k8s" {
     client_id     = var.aks_service_principal_app_id
     client_secret = var.aks_service_principal_client_secret
   }
+  api_server_authorized_ip_ranges = []
 }
 
-resource "null_resource" "configure_kubectl" {
-  provisioner "local-exec" {
-    command = <<EOT
-      az aks get-credentials --resource-group ${azurerm_resource_group.rg.name} --name ${azurerm_kubernetes_cluster.k8s.name}
-    EOT
-  }
-}

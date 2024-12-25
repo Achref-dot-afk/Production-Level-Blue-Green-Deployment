@@ -12,6 +12,7 @@ pipeline {
     environment {
         SCANNER_HOME = tool 'sonar-scanner'
         TAG = "${params.DOCKER_TAG}"
+        KUBE_NAMESPACE = "default"
     }
     stages {
         stage('Pull Code') {
@@ -66,6 +67,37 @@ pipeline {
                    withDockerRegistry(credentialsId: 'docker', toolName: 'docker'){   
                        sh "docker build -t achref2h/bankapp:${TAG} ."
                        sh "docker push achref2h/bankapp:${TAG} "
+                    }
+                }
+            }
+        }
+        stage('Deploy MySQL Deployment and Service') {
+            steps {
+                script {
+                    configFileProvider([configFile(fileId: 'kubeconfig', variable: 'KUBECONFIG_FILE')]) {
+                        docker.image('bitnami/kubectl:latest').inside("--entrypoint=''") {
+                            sh """
+                                export KUBECONFIG=${KUBECONFIG_FILE}
+                                kubectl apply -f mysql-ds.yml -n ${KUBE_NAMESPACE}
+                            """
+                        }
+                    }
+                }
+            }
+        }
+        stage('Deploy Bankapp Service if not exist') {
+            steps {
+                script {
+                    configFileProvider([configFile(fileId: 'kubeconfig', variable: 'KUBECONFIG_FILE')]) {
+                        docker.image('bitnami/kubectl:latest').inside("--entrypoint=''") {
+
+                            sh """
+                                export KUBECONFIG=${KUBECONFIG_FILE}
+                                if ! kubectl get svc bankapp-service -n ${KUBE_NAMESPACE}; then
+                                    kubectl apply -f bankapp-service.yml -n ${KUBE_NAMESPACE}
+                                fi
+                            """
+                        }
                     }
                 }
             }

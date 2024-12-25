@@ -214,12 +214,12 @@ NX.direct.api.REMOTING_API = {
         formHandler: false
       },
       {
-        name: 'done',
+        name: 'sync',
         len: 0,
         formHandler: false
       },
       {
-        name: 'sync',
+        name: 'done',
         len: 0,
         formHandler: false
       },
@@ -253,12 +253,12 @@ NX.direct.api.REMOTING_API = {
     ],
     coreui_Component: [
       {
-        name: 'readAsset',
+        name: 'canDeleteAsset',
         len: 2,
         formHandler: false
       },
       {
-        name: 'canDeleteAsset',
+        name: 'readAsset',
         len: 2,
         formHandler: false
       },
@@ -710,13 +710,13 @@ NX.direct.api.REMOTING_API = {
     ],
     ssl_Certificate: [
       {
-        name: 'retrieveFromHost',
-        len: 3,
+        name: 'details',
+        len: 1,
         formHandler: false
       },
       {
-        name: 'details',
-        len: 1,
+        name: 'retrieveFromHost',
+        len: 3,
         formHandler: false
       }
     ],
