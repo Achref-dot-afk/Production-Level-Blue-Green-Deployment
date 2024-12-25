@@ -1,0 +1,9 @@
+./AKS/terraform
+./AKS/terraform.tfstate
+./AKS/terraform.lock.hcl
+/AKS/terraform.tfstate.backup
+./AKS/terraform.tfvars
+./AKS/aks_kubeconfig
+./nexus-data/*
+./jenkins/*
+.env
