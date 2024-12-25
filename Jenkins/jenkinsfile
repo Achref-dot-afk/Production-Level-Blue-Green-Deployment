@@ -1,6 +1,6 @@
 pipeline {
     agent any
-     tools{
+    tools {
         jdk 'jdk17'
         maven 'maven3'
     }
@@ -17,16 +17,16 @@ pipeline {
     stages {
         stage('Pull Code') {
             steps {
-                git branch: 'main',credentialsId: 'git' , url: 'https://github.com/Achref-dot-afk/Production-Level-Blue-Green-Deployment.git'
+                git branch: 'main', credentialsId: 'git', url: 'https://github.com/Achref-dot-afk/Production-Level-Blue-Green-Deployment.git'
             }
         }
         stage('Maven Compile') {
             steps {
-                sh "mvn clean compile" 
+                sh "mvn clean compile"
             }
         }
         stage('Maven Test') {
-            steps{
+            steps {
                 sh "mvn test -DskipTests=true"
             }
         }
@@ -35,12 +35,12 @@ pipeline {
                 sh "trivy fs --format table -o fs.html ."
             }
         }
-        stage('Sonarqube Analysis') {
+        stage('SonarQube Analysis') {
             steps {
-                  withSonarQubeEnv('sonar-server') {
-                      sh "$SCANNER_HOME/bin/sonar-scanner -Dsonar.projectKey=Bankapp -Dsonar.projectName='Bankapp' -Dsonar.java.binaries=target/classes"
+                withSonarQubeEnv('sonar-server') {
+                    sh "$SCANNER_HOME/bin/sonar-scanner -Dsonar.projectKey=Bankapp -Dsonar.projectName='Bankapp' -Dsonar.java.binaries=target/classes"
                 }
-             }
+            }
         }
         stage('Quality Gate') {
             steps {
@@ -49,24 +49,24 @@ pipeline {
                 }
             }
         }
-        stage('Maven build') {
+        stage('Maven Build') {
             steps {
                 sh "mvn package -DskipTests=true"
             }
         }
-        stage('Publish artifacts to nexus') {
+        stage('Publish Artifacts to Nexus') {
             steps {
-                withMaven(globalMavenSettingsConfig: 'maven-settings', jdk: 'jdk17', maven: 'maven3', mavenSettingsConfig: '', traceability: true) {
+                withMaven(globalMavenSettingsConfig: 'maven-settings', jdk: 'jdk17', maven: 'maven3') {
                     sh "mvn deploy -DskipTests=true"
                 }
             }
         }
-        stage("Docker Build & Push"){
-            steps{
-                script{
-                   withDockerRegistry(credentialsId: 'docker', toolName: 'docker'){   
-                       sh "docker build -t achref2h/bankapp:${TAG} ."
-                       sh "docker push achref2h/bankapp:${TAG} "
+        stage('Docker Build & Push') {
+            steps {
+                script {
+                    withDockerRegistry(credentialsId: 'docker', toolName: 'docker') {
+                        sh "docker build -t achref2h/bankapp:${TAG} ."
+                        sh "docker push achref2h/bankapp:${TAG}"
                     }
                 }
             }
@@ -90,15 +90,14 @@ pipeline {
                 }
             }
         }
-        stage('Deploy Bankapp Service if not exist') {
+        stage('Deploy Bankapp Service if Not Exist') {
             steps {
                 script {
                     configFileProvider([configFile(fileId: 'kubeconfig', variable: 'KUBECONFIG_FILE')]) {
                         docker.image('bitnami/kubectl:latest').inside("--entrypoint=''") {
-
                             sh """
                                 export KUBECONFIG=${KUBECONFIG_FILE}
-                                if ! kubectl get svc ./AKS/manifests/bankapp-service -n ${KUBE_NAMESPACE}; then
+                                if ! kubectl get svc bankapp-service -n ${KUBE_NAMESPACE}; then
                                     kubectl apply -f ./AKS/manifests/bankapp-service.yml -n ${KUBE_NAMESPACE}
                                 fi
                             """
@@ -110,16 +109,10 @@ pipeline {
         stage('Deploy to Kubernetes') {
             steps {
                 script {
-                    def deploymentFile = ""
-                    if (params.DEPLOY_ENV == 'blue') {
-                        deploymentFile = './AKS/manifests/app-deployment-blue.yml'
-                    } else {
-                        deploymentFile = './AKS/manifests/app-deployment-green.yml'
-                    }
+                    def deploymentFile = params.DEPLOY_ENV == 'blue' ? './AKS/manifests/app-deployment-blue.yml' : './AKS/manifests/app-deployment-green.yml'
 
                     configFileProvider([configFile(fileId: 'kubeconfig', variable: 'KUBECONFIG_FILE')]) {
                         docker.image('bitnami/kubectl:latest').inside("--entrypoint=''") {
-
                             sh """
                                 export KUBECONFIG=${KUBECONFIG_FILE}
                                 kubectl apply -f ${deploymentFile} -n ${KUBE_NAMESPACE}
@@ -139,27 +132,26 @@ pipeline {
 
                     configFileProvider([configFile(fileId: 'kubeconfig', variable: 'KUBECONFIG_FILE')]) {
                         docker.image('bitnami/kubectl:latest').inside("--entrypoint=''") {
-                        sh '''
-                            kubectl patch service bankapp-service -p "{\\"spec\\": {\\"selector\\": {\\"app\\": \\"bankapp\\", \\"version\\": \\"''' + newEnv + '''\\"}}}" -n ${KUBE_NAMESPACE}
-                        '''
+                            sh """
+                                export KUBECONFIG=${KUBECONFIG_FILE}
+                                kubectl patch service bankapp-service -p '{"spec": {"selector": {"app": "bankapp", "version": "'${newEnv}'"}}}' -n ${KUBE_NAMESPACE}
+                            """
+                        }
                     }
                     echo "Traffic has been switched to the ${newEnv} environment."
                 }
             }
         }
-        }
-          post {
-            always {
-                emailext attachLog: true,
+    }
+    post {
+        always {
+            emailext(
+                attachLog: true,
                 subject: "'${currentBuild.result}'",
-                body: "Project: ${env.JOB_NAME}<br/>" +
-                    "Build Number: ${env.BUILD_NUMBER}<br/>" +
-                    "URL: ${env.BUILD_URL}<br/>",
-                to: 'achrefh1bli22@gmail.com',                           
+                body: "Project: ${env.JOB_NAME}<br/>Build Number: ${env.BUILD_NUMBER}<br/>URL: ${env.BUILD_URL}<br/>",
+                to: 'achrefh1bli22@gmail.com',
                 attachmentsPattern: 'fs.html'
+            )
         }
     }
-  }
- }
-
-
+}
