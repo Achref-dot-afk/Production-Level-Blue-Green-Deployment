@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata modelVersion="1.1.0">
+  <groupId>com.example</groupId>
+  <artifactId>bankapp</artifactId>
+  <versioning>
+    <lastUpdated>20241225184750</lastUpdated>
+    <snapshot>
+      <timestamp>20241225.184750</timestamp>
+      <buildNumber>7</buildNumber>
+    </snapshot>
+    <snapshotVersions>
+      <snapshotVersion>
+        <extension>pom</extension>
+        <value>0.0.1-20241225.184750-7</value>
+        <updated>20241225184750</updated>
+      </snapshotVersion>
+      <snapshotVersion>
+        <extension>jar</extension>
+        <value>0.0.1-20241225.184750-7</value>
+        <updated>20241225184750</updated>
+      </snapshotVersion>
+    </snapshotVersions>
+  </versioning>
+  <version>0.0.1-SNAPSHOT</version>
+</metadata>
