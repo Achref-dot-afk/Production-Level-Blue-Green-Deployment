@@ -48,4 +48,13 @@ resource "azurerm_kubernetes_cluster" "k8s" {
   }
   api_server_authorized_ip_ranges = []
 }
+resource "null_resource" "get_credentials" {
+  provisioner "local-exec" {
+    command = <<EOT
+      az aks get-credentials --resource-group ${azurerm_resource_group.rg.name} --name ${azurerm_kubernetes_cluster.k8s.name} --overwrite-existing
+    EOT
+  }
+
+  depends_on = [azurerm_kubernetes_cluster.k8s]
+}
 
