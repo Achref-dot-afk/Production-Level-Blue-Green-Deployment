@@ -75,6 +75,7 @@ pipeline {
             steps {
                 sh "trivy image --format table -o docker.html achref2h/bankapp:${TAG}"
             }
+        }
         stage('Deploy MySQL Deployment and Service') {
             steps {
                 script {
