@@ -111,9 +111,9 @@ pipeline {
                 script {
                     def deploymentFile = ""
                     if (params.DEPLOY_ENV == 'blue') {
-                        deploymentFile = 'app-deployment-blue.yml'
+                        deploymentFile = './AKS/manifests/app-deployment-blue.yml'
                     } else {
-                        deploymentFile = 'app-deployment-green.yml'
+                        deploymentFile = './AKS/manifests/app-deployment-green.yml'
                     }
 
                     configFileProvider([configFile(fileId: 'kubeconfig', variable: 'KUBECONFIG_FILE')]) {
